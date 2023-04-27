@@ -1,9 +1,10 @@
+import { useSelector } from "react-redux";
 import { Navigate } from "react-router-dom";
 
-const authUser = false;
 export default function ProtectedRoute({ children }) {
-  if (!authUser) {
-    return <Navigate to="/login" />;
+  const user = useSelector(state => state.auth.auth);
+  if (!user) {
+    return <Navigate to="/" />;
   }
   return children;
 }
